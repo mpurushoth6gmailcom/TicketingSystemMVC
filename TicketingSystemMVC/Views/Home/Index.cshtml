@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TicketLogModel>
+@{ Layout = "_Layout"; ViewBag.Title = "All Tickets";}
+
+<h2>All Reservations</h2>
+<a asp-action="Create" class="btn btn-sm btn-primary">Add Tickets</a>
+<a asp-action="UpdateTicket" class="btn btn-sm btn-secondary">Get Ticket</a>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+        <tr>
+            <td>@r.Ticket_Id</td>
+            <td>@r.Ticket_Title</td>
+            <td>@r.Ticket_Description</td>
+            <td>@r.Ticket_Category</td>
+            <td>@r.Create_Date</td>
+            <td>
+                <a asp-action="UpdateTicket" asp-route-id="@r">
+                    <img src="../icon/edit.png" />
+                </a>
+            </td>
+            <td>
+                <form asp-action="DeleteTicketDetails" method="post">
+                    <input type="hidden" value="@r.Ticket_Id" name="ReservationId" />
+                    <input type="image" src="../icon/close.png" />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
